@@ -15,13 +15,13 @@ public class AgenciaService {
 	@Autowired
 	private AgenciaRepository agenciaRepository;
 
-	public Agencia atualizar(Long codigo, Agencia agencia) {
-		Agencia agenciaSalva = agenciaRepository.getOne(codigo);
+	public Agencia atualizar(Long id_agencia, Agencia agencia) {
+		Agencia agenciaSalva = agenciaRepository.getOne(id_agencia);
 		if (agenciaSalva == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		
-		BeanUtils.copyProperties(agencia, agenciaSalva, "codigo");
+		BeanUtils.copyProperties(agencia, agenciaSalva, "id_agencia");
 		return agenciaRepository.save(agenciaSalva);
 	}
 	
@@ -30,8 +30,8 @@ public class AgenciaService {
 	
 	
 	
-	private Agencia buscarAgenciaPeloCodigo(Long codigo) {
-		Agencia agenciaSalva = agenciaRepository.getOne(codigo);
+	private Agencia buscarAgenciaPeloCodigo(Long id_agencia) {
+		Agencia agenciaSalva = agenciaRepository.getOne(id_agencia);
 		if (agenciaSalva == null) {
 			throw new EmptyResultDataAccessException(1);
 		}

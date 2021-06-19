@@ -26,6 +26,7 @@ import com.concessionaria.api.model.Montadora;
 import com.concessionaria.api.model.Veiculo;
 import com.concessionaria.api.repository.AgenciaRepository;
 import com.concessionaria.api.repository.VeiculoRepository;
+import com.concessionaria.api.service.AgenciaService;
 
 @RestController
 @RequestMapping("/agencias")
@@ -36,6 +37,9 @@ public class AgenciaController {
 	
 	@Autowired
 	private VeiculoRepository veiculoRepository;
+	
+	@Autowired
+	private AgenciaService agenciaService;
 	
 	@GetMapping
 	public List<Agencia> getAgencias(){
@@ -78,4 +82,10 @@ public class AgenciaController {
 	        return agenciaRepository.save(agencia);
 	    }
 
+	 
+	 @PutMapping("/{id}")
+		public ResponseEntity<Agencia> atualizar(@PathVariable Long id, @Valid @RequestBody Agencia agencia) {
+		 Agencia agenciaSalva = agenciaService.atualizar(id, agencia);
+			return ResponseEntity.ok(agenciaSalva);
+		}
 }

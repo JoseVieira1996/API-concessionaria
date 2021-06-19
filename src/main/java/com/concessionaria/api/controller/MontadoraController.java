@@ -35,6 +35,8 @@ public class MontadoraController {
 	@Autowired
 	private MontadoraRepository montadoraRepository;
 	
+	@Autowired
+	private MontadoraService montadoraService;
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
@@ -45,8 +47,6 @@ public class MontadoraController {
 	}
 	
 
-
-	
 	@GetMapping("/{id}")
 	public ResponseEntity <Montadora> buscarPeloId (@PathVariable Long id){
 		Montadora montadora = montadoraRepository.findById(id).orElse(null);
@@ -72,14 +72,13 @@ public class MontadoraController {
 		montadoraRepository.deleteById(id);
 	}
 	
-	/*
+	
 	@PutMapping("/{id}")
-	public ResponseEntity<Montadora> atualizar(@PathVariable Long codigo, @Valid @RequestBody Montadora montadora) {
-		Montadora montadoraSalva = MontadoraService.atualizar(codigo, montadora);
+	public ResponseEntity<Montadora> atualizar(@PathVariable Long id, @Valid @RequestBody Montadora montadora) {
+		Montadora montadoraSalva = montadoraService.atualizar(id, montadora);
 		return ResponseEntity.ok(montadoraSalva);
 	}
 	
-	*/
 	
 	
 }

@@ -15,27 +15,25 @@ public class VeiculoService {
 	@Autowired
 	private VeiculoRepository veiculoRepository;
 
-	public Veiculo atualizar(Long codigo, Veiculo agencia) {
-		Veiculo veiculoSalva = veiculoRepository.getOne(codigo);
-		if (veiculoSalva == null) {
+	public Veiculo atualizar(Long id_veiculo, Veiculo agencia) {
+		Veiculo veiculoSalvo = veiculoRepository.getOne(id_veiculo);
+		if (veiculoSalvo == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
 		
-		BeanUtils.copyProperties(agencia, veiculoSalva, "codigo");
-		return veiculoRepository.save(veiculoSalva);
+		BeanUtils.copyProperties(agencia, veiculoSalvo, "id_veiculo");
+		return veiculoRepository.save(veiculoSalvo);
 	}
 	
 	
 
 	
-	
-	
-	private Veiculo buscarPessoaPeloCodigo(Long codigo) {
-		Veiculo veiculoSalva = veiculoRepository.getOne(codigo);
-		if (veiculoSalva == null) {
+	private Veiculo buscarPessoaPeloCodigo(Long id_veiculo) {
+		Veiculo veiculoSalvo = veiculoRepository.getOne(id_veiculo);
+		if (veiculoSalvo == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		return veiculoSalva;
+		return veiculoSalvo;
 	}
 
 

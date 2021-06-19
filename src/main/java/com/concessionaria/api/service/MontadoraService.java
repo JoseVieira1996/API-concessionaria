@@ -15,13 +15,10 @@ public class MontadoraService {
 	@Autowired
 	private MontadoraRepository montadoraRepository;
 
-	public Montadora atualizar(Long codigo, Montadora montadora) {
-		Montadora montadoraSalva = montadoraRepository.getOne(codigo);
-		if (montadoraSalva == null) {
-			throw new EmptyResultDataAccessException(1);
-		}
+	public Montadora atualizar(Long id_montadora, Montadora montadora) {
+		Montadora montadoraSalva = buscarPessoaPeloCodigo(id_montadora);
 		
-		BeanUtils.copyProperties(montadora, montadoraSalva, "codigo");
+		BeanUtils.copyProperties(montadora, montadoraSalva,"id_montadora");
 		return montadoraRepository.save(montadoraSalva);
 	}
 	
@@ -30,8 +27,8 @@ public class MontadoraService {
 	
 	
 	
-	private Montadora buscarPessoaPeloCodigo(Long codigo) {
-		Montadora montadoraSalva = montadoraRepository.getOne(codigo);
+	private Montadora buscarPessoaPeloCodigo(Long id_montadora) {
+		Montadora montadoraSalva = montadoraRepository.getOne(id_montadora);
 		if (montadoraSalva == null) {
 			throw new EmptyResultDataAccessException(1);
 		}

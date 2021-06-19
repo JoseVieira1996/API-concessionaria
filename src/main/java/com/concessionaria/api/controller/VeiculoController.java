@@ -24,10 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.concessionaria.api.model.Agencia;
-import com.concessionaria.api.model.Montadora;
 import com.concessionaria.api.model.Veiculo;
 import com.concessionaria.api.repository.AgenciaRepository;
 import com.concessionaria.api.repository.VeiculoRepository;
+import com.concessionaria.api.service.VeiculoService;
 
 @RestController
 @RequestMapping("/veiculos")
@@ -36,7 +36,8 @@ public class VeiculoController {
 	@Autowired
 	private VeiculoRepository veiculoRepository;
 	
-	
+	@Autowired
+	private VeiculoService veiculoService;
 
 	@Autowired
 	private ApplicationEventPublisher publisher;
@@ -73,6 +74,12 @@ public class VeiculoController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover (@PathVariable Long id) {
 		veiculoRepository.deleteById(id);
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Veiculo> atualizar(@PathVariable Long id, @Valid @RequestBody Veiculo veiculo) {
+		Veiculo veiculoSalvo = veiculoService.atualizar(id, veiculo);
+		return ResponseEntity.ok(veiculoSalvo);
 	}
 	
 	
