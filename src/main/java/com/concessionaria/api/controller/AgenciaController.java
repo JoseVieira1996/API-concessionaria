@@ -46,6 +46,7 @@ public class AgenciaController {
 		return agenciaRepository.findAll();
 	}
 	
+	//buscar por id
 	@GetMapping("/{id}")
 	public ResponseEntity<Agencia> buscarPeloId (@PathVariable Long id){
 		Agencia agencia = agenciaRepository.findById(id).orElse(null);
